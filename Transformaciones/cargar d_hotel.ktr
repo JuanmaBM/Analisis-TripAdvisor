@@ -115,6 +115,27 @@
       <bordercolorblue>100</bordercolorblue>
       <drawshadow>Y</drawshadow>
     </notepad>
+    <notepad>
+      <note>Guardamos los datos en un excel para futuro uso</note>
+      <xloc>1216</xloc>
+      <yloc>496</yloc>
+      <width>268</width>
+      <heigth>26</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>TIN</name>
@@ -147,7 +168,44 @@
   <hop> <from>Extraer direcci&#xf3;n desglosada de la direccion completa</from><to>Agregar nombre estados</to><enabled>Y</enabled> </hop>
   <hop> <from>Eliminar subindices de Wikipedia</from><to>Agregar nombre estados</to><enabled>Y</enabled> </hop>
   <hop> <from>Agregar nombre estados</from><to>Insertar datos en la D_HOTEL</to><enabled>Y</enabled> </hop>
+  <hop> <from>Eliminar subindices de Wikipedia</from><to>Guardar datos en excel</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Agregar nombre estados</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Eliminar subindices de Wikipedia</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>REGION</name>
+        <field>REGION</field>
+      </key>
+      <value>
+        <name>CIUDAD</name>
+        <rename>ESTADO</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1216</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>A&#xf1;adir clave subrogada</name>
     <type>Sequence</type>
@@ -178,8 +236,8 @@
     </step>
 
   <step>
-    <name>Extraer flujo de datos de la fuente</name>
-    <type>JsonInput</type>
+    <name>Definir URL</name>
+    <type>DataGrid</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -188,26 +246,9 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <readurl>N</readurl>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
-    <ignoreMissingPath>N</ignoreMissingPath>
-    <rownum_field/>
-    <file>
-      <name>&#x2f;home&#x2f;juanmabm&#x2f;Dropbox&#x2f;Mi Dropbox&#x2f;TIN&#x2f;Proyecto&#x2f;Fuente datos&#x2f;</name>
-      <filemask>.&#x2a;&#x5c;.json</filemask>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
     <fields>
       <field>
-        <name>NOMBRE</name>
-        <path>HotelInfo.Name</path>
+        <name>url</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -215,72 +256,23 @@
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>PRECIO</name>
-        <path>HotelInfo.Price</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>DIRECCION_COMPLETA</name>
-        <path>HotelInfo.Address</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>HOTEL_ID_NK</name>
-        <path>HotelInfo.HotelID</path>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
+        <set_empty_string>N</set_empty_string>
       </field>
     </fields>
-    <limit>0</limit>
-    <IsInFields>N</IsInFields>
-    <IsAFile>N</IsAFile>
-    <valueField/>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
+    <data>
+      <line> <item>https&#x3a;&#x2f;&#x2f;es.wikipedia.org&#x2f;wiki&#x2f;Estado_de_los_Estados_Unidos</item> </line>
+    </data>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>192</yloc>
+      <xloc>96</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Limpiar campos de precios</name>
-    <type>ScriptValueMod</type>
+    <name>Eliminar campos nulos</name>
+    <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -289,27 +281,65 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f; Este script elimina los caracteres no deseables de los campos de precios &#xa;&#xa;var precio_min &#x3d; PRECIO_MIN.substr&#x28;1&#x29;&#x3b;&#xa;var precio_max &#x3d; PRECIO_MAX.slice&#x28;1, -1&#x29;&#x3b;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>precio_min</name>
-        <rename>precio_min</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>      <field>        <name>precio_max</name>
-        <rename>precio_max</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>    </fields>     <cluster_schema/>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>CIUDAD</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>Kobe Bryant</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>528</xloc>
-      <yloc>192</yloc>
+      <xloc>1024</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Eliminar subindices de Wikipedia</name>
+    <type>RegexEval</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <script><![CDATA[([[a-zA-ZáéíóúÁÉÍÓÚ]\s]*)\[[0-9]*\]]]></script>    <matcher>CIUDAD</matcher>
+    <resultfieldname>result</resultfieldname>
+    <usevar>N</usevar>
+    <allowcapturegroups>Y</allowcapturegroups>
+    <replacefields>Y</replacefields>
+    <canoneq>N</canoneq>
+    <caseinsensitive>N</caseinsensitive>
+    <comment>N</comment>
+    <dotall>N</dotall>
+    <multiline>N</multiline>
+    <unicode>N</unicode>
+    <unix>N</unix>
+    <fields>
+      <field>
+        <name>CIUDAD</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1216</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -396,8 +426,8 @@
     </step>
 
   <step>
-    <name>Separar rango de precios</name>
-    <type>FieldSplitter</type>
+    <name>Extraer flujo de datos de la fuente</name>
+    <type>JsonInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -406,45 +436,178 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-   <splitfield>PRECIO</splitfield>
-   <delimiter> - </delimiter>
-   <enclosure/>
-    <fields>      <field>        <name>PRECIO_MIN</name>
-        <id/>
-        <idrem>N</idrem>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <defaultPathLeafToNull>N</defaultPathLeafToNull>
+    <rownum_field/>
+    <file>
+      <name>C&#x3a;&#x5c;Users&#x5c;informatico&#x5c;Documents&#x5c;Analisis-TripAdvisor&#x5c;Fuente datos</name>
+      <filemask>.&#x2a;&#x5c;.json</filemask>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>NOMBRE</name>
+        <path>HotelInfo.Name</path>
         <type>String</type>
         <format/>
-        <group/>
-        <decimal/>
         <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>      <field>        <name>PRECIO_MAX</name>
-        <id/>
-        <idrem>N</idrem>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>PRECIO</name>
+        <path>HotelInfo.Price</path>
         <type>String</type>
         <format/>
-        <group/>
-        <decimal/>
         <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>    </fields>     <cluster_schema/>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>DIRECCION_COMPLETA</name>
+        <path>HotelInfo.Address</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>HOTEL_ID_NK</name>
+        <path>HotelInfo.HotelID</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>N</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField/>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
+      <xloc>112</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Obtener web en HTML</name>
+    <name>Insertar datos en la D_HOTEL</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>TIN</connection>
+    <schema/>
+    <table>D_HOTEL</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>NOMBRE</column_name>
+          <stream_name>NOMBRE</stream_name>
+        </field>
+        <field>
+          <column_name>PRECIO_MIN</column_name>
+          <stream_name>PRECIO_MIN</stream_name>
+        </field>
+        <field>
+          <column_name>PRECIO_MAX</column_name>
+          <stream_name>PRECIO_MAX</stream_name>
+        </field>
+        <field>
+          <column_name>ID_HOTEL_NK</column_name>
+          <stream_name>HOTEL_ID_NK</stream_name>
+        </field>
+        <field>
+          <column_name>ID_HOTEL</column_name>
+          <stream_name>HOTEL_ID</stream_name>
+        </field>
+        <field>
+          <column_name>DIRECCION</column_name>
+          <stream_name>DIRECCION</stream_name>
+        </field>
+        <field>
+          <column_name>CIUDAD</column_name>
+          <stream_name>CIUDAD</stream_name>
+        </field>
+        <field>
+          <column_name>REGION</column_name>
+          <stream_name>REGION</stream_name>
+        </field>
+        <field>
+          <column_name>CODIGOPOSTAL</column_name>
+          <stream_name>CODIGOPOSTAL</stream_name>
+        </field>
+        <field>
+          <column_name>ESTADO</column_name>
+          <stream_name>ESTADO</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1392</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Limpiar campos de precios</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -457,114 +620,24 @@
     <compatible>N</compatible>
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>onTransform</jsScript_name>
-        <jsScript_script>java&#x3b;&#xa;&#xa;&#x2f;&#x2f; pseudo import&#xa;Jsoup &#x3d; org.jsoup.Jsoup&#x3b;&#xa;parser &#x3d; org.jsoup.parser.Parser&#x3b;&#xa;Whitelist &#x3d; org.jsoup.safety.Whitelist&#x3b;&#xa;&#xa;&#x2f;&#x2f; make wellformed document&#xa;doc &#x3d; Jsoup.parse&#x28;html, &#x22;&#x22;, parser.xmlParser&#x28;&#x29;&#x29;&#x3b;&#xa;&#xa;&#xa;&#x2f;&#x2f; nothing beats a clean body&#xa;doc.body&#x28;&#x29;.html&#x28;Jsoup.clean&#x28;doc.body&#x28;&#x29;.html&#x28;&#x29;, Whitelist.relaxed&#x28;&#x29;.preserveRelativeLinks&#x28;true&#x29;&#x29;&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f; we don&#x27;t need a head&#xa;doc.head&#x28;&#x29;.remove&#x28;&#x29;&#x3b;&#xa;&#x2f;&#x2f; select single root markup containing our xloop&#xa;&#x2f;&#x2f;doc.select&#x28;&#x22;tbody&#x22;&#x29;.after&#x28;&#x22;mobile_noscript&#x22;&#x29;.first&#x28;&#x29;.remove&#x28;&#x29;&#x3b;&#xa;&#xa;&#xa;&#x2f;&#x2f; select single root markup containing our xloop&#xa;&#x2f;&#x2f;var xhtml &#x3d; doc.select&#x28;&#x22;tbody&#x22;&#x29;.first&#x28;&#x29;.outerHtml&#x28;&#x29;&#x3b;&#xa; var xhtml &#x3d; doc.select&#x28;&#x22;tbody&#x22;&#x29;.outerHtml&#x28;&#x29;&#x3b;&#xa;&#xa;&#xa;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>xhtml</name>
-        <rename>xhtml</rename>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f; Este script elimina los caracteres no deseables de los campos de precios &#xa;&#xa;var precio_min &#x3d; PRECIO_MIN.substr&#x28;1&#x29;&#x3b;&#xa;var precio_max &#x3d; PRECIO_MAX.slice&#x28;1, -1&#x29;&#x3b;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>precio_min</name>
+        <rename>precio_min</rename>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
-        <replace>N</replace>
+        <replace>Y</replace>
+      </field>      <field>        <name>precio_max</name>
+        <rename>precio_max</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>Y</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Petici&#xf3;n al servidor</name>
-    <type>HTTP</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <url>https&#x3a;&#x2f;&#x2f;es.wikipedia.org&#x2f;wiki&#x2f;Estado_de_los_Estados_Unidos</url>
-    <urlInField>Y</urlInField>
-    <urlField>url</urlField>
-    <encoding/>
-    <httpLogin/>
-    <httpPassword>Encrypted </httpPassword>
-    <proxyHost/>
-    <proxyPort/>
-    <socketTimeout/>
-    <connectionTimeout/>
-    <closeIdleConnectionsTime/>
-    <lookup>
-    </lookup>
-    <result>
-      <name>html</name>
-      <code>status</code>
-      <response_time/>
-    </result>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>240</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Definir URL</name>
-    <type>DataGrid</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>url</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <data>
-      <line> <item>https&#x3a;&#x2f;&#x2f;es.wikipedia.org&#x2f;wiki&#x2f;Estado_de_los_Estados_Unidos</item> </line>
-    </data>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Obtener tbody</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>xhtml</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>544</xloc>
-      <yloc>384</yloc>
+      <xloc>528</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -655,6 +728,97 @@
     </step>
 
   <step>
+    <name>Obtener tbody</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>xhtml</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>544</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Obtener web en HTML</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>onTransform</jsScript_name>
+        <jsScript_script>java&#x3b;&#xa;&#xa;&#x2f;&#x2f; pseudo import&#xa;Jsoup &#x3d; org.jsoup.Jsoup&#x3b;&#xa;parser &#x3d; org.jsoup.parser.Parser&#x3b;&#xa;Whitelist &#x3d; org.jsoup.safety.Whitelist&#x3b;&#xa;&#xa;&#x2f;&#x2f; make wellformed document&#xa;doc &#x3d; Jsoup.parse&#x28;html, &#x22;&#x22;, parser.xmlParser&#x28;&#x29;&#x29;&#x3b;&#xa;&#xa;&#xa;&#x2f;&#x2f; nothing beats a clean body&#xa;doc.body&#x28;&#x29;.html&#x28;Jsoup.clean&#x28;doc.body&#x28;&#x29;.html&#x28;&#x29;, Whitelist.relaxed&#x28;&#x29;.preserveRelativeLinks&#x28;true&#x29;&#x29;&#x29;&#x3b;&#xa;&#xa;&#x2f;&#x2f; we don&#x27;t need a head&#xa;doc.head&#x28;&#x29;.remove&#x28;&#x29;&#x3b;&#xa;&#x2f;&#x2f; select single root markup containing our xloop&#xa;&#x2f;&#x2f;doc.select&#x28;&#x22;tbody&#x22;&#x29;.after&#x28;&#x22;mobile_noscript&#x22;&#x29;.first&#x28;&#x29;.remove&#x28;&#x29;&#x3b;&#xa;&#xa;&#xa;&#x2f;&#x2f; select single root markup containing our xloop&#xa;&#x2f;&#x2f;var xhtml &#x3d; doc.select&#x28;&#x22;tbody&#x22;&#x29;.first&#x28;&#x29;.outerHtml&#x28;&#x29;&#x3b;&#xa; var xhtml &#x3d; doc.select&#x28;&#x22;tbody&#x22;&#x29;.outerHtml&#x28;&#x29;&#x3b;&#xa;&#xa;&#xa;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>xhtml</name>
+        <rename>xhtml</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>400</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Petici&#xf3;n al servidor</name>
+    <type>HTTP</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <url>https&#x3a;&#x2f;&#x2f;es.wikipedia.org&#x2f;wiki&#x2f;Estado_de_los_Estados_Unidos</url>
+    <urlInField>Y</urlInField>
+    <urlField>url</urlField>
+    <encoding/>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <socketTimeout/>
+    <connectionTimeout/>
+    <closeIdleConnectionsTime/>
+    <lookup>
+    </lookup>
+    <result>
+      <name>html</name>
+      <code>status</code>
+      <response_time/>
+    </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>240</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Seleccionar valores</name>
     <type>SelectValues</type>
     <description/>
@@ -683,8 +847,8 @@
     </step>
 
   <step>
-    <name>Eliminar subindices de Wikipedia</name>
-    <type>RegexEval</type>
+    <name>Separar rango de precios</name>
+    <type>FieldSplitter</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -693,108 +857,46 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <script><![CDATA[([[a-zA-ZáéíóúÁÉÍÓÚ]\s]*)\[[0-9]*\]]]></script>    <matcher>CIUDAD</matcher>
-    <resultfieldname>result</resultfieldname>
-    <usevar>N</usevar>
-    <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>Y</replacefields>
-    <canoneq>N</canoneq>
-    <caseinsensitive>N</caseinsensitive>
-    <comment>N</comment>
-    <dotall>N</dotall>
-    <multiline>N</multiline>
-    <unicode>N</unicode>
-    <unix>N</unix>
-    <fields>
-      <field>
-        <name>CIUDAD</name>
+   <splitfield>PRECIO</splitfield>
+   <delimiter> - </delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>PRECIO_MIN</name>
+        <id/>
+        <idrem>N</idrem>
         <type>String</type>
         <format/>
         <group/>
         <decimal/>
+        <currency/>
         <length>-1</length>
         <precision>-1</precision>
         <nullif/>
         <ifnull/>
         <trimtype>none</trimtype>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1216</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Eliminar campos nulos</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>CIUDAD</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>Kobe Bryant</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1024</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Agregar nombre estados</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Eliminar subindices de Wikipedia</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>REGION</name>
-        <field>REGION</field>
-      </key>
-      <value>
-        <name>CIUDAD</name>
-        <rename>ESTADO</rename>
-        <default/>
+      </field>      <field>        <name>PRECIO_MAX</name>
+        <id/>
+        <idrem>N</idrem>
         <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1216</xloc>
+      <xloc>336</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Insertar datos en la D_HOTEL</name>
-    <type>TableOutput</type>
+    <name>Guardar datos en excel</name>
+    <type>ExcelOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -803,69 +905,68 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>TIN</connection>
-    <schema/>
-    <table>D_HOTEL</table>
-    <commit>1000</commit>
-    <truncate>Y</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+    <header>Y</header>
+    <footer>N</footer>
+    <encoding/>
+    <append>N</append>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>C&#x3a;&#x5c;Users&#x5c;informatico&#x5c;Documents&#x5c;Analisis-TripAdvisor&#x5c;Transformaciones&#x5c;estados</name>
+      <extention>xls</extention>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
+      <create_parent_folder>N</create_parent_folder>
+      <split>N</split>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <sheetname>Sheet1</sheetname>
+      <autosizecolums>N</autosizecolums>
+      <nullisblank>N</nullisblank>
+      <protect_sheet>N</protect_sheet>
+      <password>Encrypted </password>
+      <splitevery>0</splitevery>
+      <usetempfiles>N</usetempfiles>
+      <tempdirectory/>
+      </file>
+    <template>
+      <enabled>N</enabled>
+      <append>N</append>
+      <filename>template.xls</filename>
+    </template>
     <fields>
-        <field>
-          <column_name>NOMBRE</column_name>
-          <stream_name>NOMBRE</stream_name>
-        </field>
-        <field>
-          <column_name>PRECIO_MIN</column_name>
-          <stream_name>PRECIO_MIN</stream_name>
-        </field>
-        <field>
-          <column_name>PRECIO_MAX</column_name>
-          <stream_name>PRECIO_MAX</stream_name>
-        </field>
-        <field>
-          <column_name>ID_HOTEL_NK</column_name>
-          <stream_name>HOTEL_ID_NK</stream_name>
-        </field>
-        <field>
-          <column_name>ID_HOTEL</column_name>
-          <stream_name>HOTEL_ID</stream_name>
-        </field>
-        <field>
-          <column_name>DIRECCION</column_name>
-          <stream_name>DIRECCION</stream_name>
-        </field>
-        <field>
-          <column_name>CIUDAD</column_name>
-          <stream_name>CIUDAD</stream_name>
-        </field>
-        <field>
-          <column_name>REGION</column_name>
-          <stream_name>REGION</stream_name>
-        </field>
-        <field>
-          <column_name>CODIGOPOSTAL</column_name>
-          <stream_name>CODIGOPOSTAL</stream_name>
-        </field>
-        <field>
-          <column_name>ESTADO</column_name>
-          <stream_name>ESTADO</stream_name>
-        </field>
+      <field>
+        <name>CIUDAD</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>REGION</name>
+        <type>String</type>
+        <format/>
+      </field>
     </fields>
+    <custom>
+    <header_font_name>arial</header_font_name>
+    <header_font_size>10</header_font_size>
+    <header_font_bold>N</header_font_bold>
+    <header_font_italic>N</header_font_italic>
+    <header_font_underline>no</header_font_underline>
+    <header_font_orientation>horizontal</header_font_orientation>
+    <header_font_color>black</header_font_color>
+    <header_background_color>none</header_background_color>
+    <header_row_height>255</header_row_height>
+    <header_alignment>left</header_alignment>
+    <header_image/>
+    <row_font_name>arial</row_font_name>
+    <row_font_size>10</row_font_size>
+    <row_font_color>black</row_font_color>
+    <row_background_color>none</row_background_color>
+      </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1392</xloc>
-      <yloc>192</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
