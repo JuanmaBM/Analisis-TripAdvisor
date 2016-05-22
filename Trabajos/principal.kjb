@@ -156,7 +156,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Users&#x5c;informatico&#x5c;Documents&#x5c;Analisis-TripAdvisor&#x5c;Transformaciones&#x5c;carga d_autor.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;..&#x2f;Transformaciones&#x2f;carga d_autor.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

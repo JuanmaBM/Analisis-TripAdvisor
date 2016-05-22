@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>carga d_autor</name>
+    <name>carga d_autor_v2</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -93,32 +94,24 @@
   <order>
   <hop> <from>Extraer flujo de datos de la fuente</from><to>A&#xf1;adir clave subrogada</to><enabled>Y</enabled> </hop>
   <hop> <from>A&#xf1;adir clave subrogada</from><to>Filtrar localizacion nula</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar localizacion nula</from><to>Dividir localizacion</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar localizacion nula</from><to>Seleccion de filas nulas</to><enabled>Y</enabled> </hop>
-  <hop> <from>Seleccion de filas nulas</from><to>A&#xf1;adir constantes</to><enabled>Y</enabled> </hop>
-  <hop> <from>Dividir localizacion</from><to>Filtrar estados nulos</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar estados nulos</from><to>Seleccion de filas nulas &#x28;estado&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Seleccion de filas nulas &#x28;estado&#x29;</from><to>Definir la url para la peticion</to><enabled>Y</enabled> </hop>
   <hop> <from>Definir la url para la peticion</from><to>Obtener informaci&#xf3;n de la ubicacion</to><enabled>Y</enabled> </hop>
   <hop> <from>Obtener informaci&#xf3;n de la ubicacion</from><to>Transformar respuesta en json</to><enabled>Y</enabled> </hop>
-  <hop> <from>Seleccionar valores necesarios</from><to>A&#xf1;adir constantes</to><enabled>Y</enabled> </hop>
-  <hop> <from>A&#xf1;adir localizacion</from><to>Seleccionar valores necesarios</to><enabled>Y</enabled> </hop>
-  <hop> <from>A&#xf1;adir constantes</from><to>Eliminar campos innecesarios</to><enabled>Y</enabled> </hop>
-  <hop> <from>Transformar respuesta en json</from><to>Obtener estado</to><enabled>Y</enabled> </hop>
-  <hop> <from>Seleccionar estado de la peticion</from><to>Unir filas</to><enabled>Y</enabled> </hop>
-  <hop> <from>Obtener estado</from><to>Seleccionar estado de la peticion</to><enabled>Y</enabled> </hop>
-  <hop> <from>Eliminar campos innecesarios</from><to>Unir filas</to><enabled>Y</enabled> </hop>
-  <hop> <from>Obtener lista de estados abreviados</from><to>Buscar coincidencias con estados abreviados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Unir filas</from><to>Eliminar espacio de los estados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Buscar coincidencias con estados abreviados</from><to>Reemplazar valores abreviados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Eliminar espacio de los estados</from><to>Eliminar numeros de las abreviaturas</to><enabled>Y</enabled> </hop>
-  <hop> <from>Eliminar numeros de las abreviaturas</from><to>Buscar coincidencias con estados abreviados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Reemplazar valores abreviados</from><to>Insertar en D_Autor</to><enabled>Y</enabled> </hop>
-  <hop> <from>Transformar respuesta en json</from><to>A&#xf1;adir localizacion</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filtrar estados nulos</from><to>A&#xf1;adir constantes para igualar numero de campos</to><enabled>Y</enabled> </hop>
-  <hop> <from>A&#xf1;adir constantes para igualar numero de campos</from><to>Seleccionar todos los campos para insertar</to><enabled>Y</enabled> </hop>
-  <hop> <from>Seleccionar todos los campos para insertar</from><to>Insertar en D_Autor</to><enabled>Y</enabled> </hop>
   <hop> <from>Insertar en D_Autor</from><to>Finalizado</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filtrar localizacion nula</from><to>Seleccion de filas nulas &#x28;estado&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Eliminar campos de la busqueda</from><to>Unir filas</to><enabled>Y</enabled> </hop>
+  <hop> <from>Transformar respuesta en json</from><to>Transformar respuesta en json 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Transformar respuesta en json 2</from><to>Eliminar campos de la busqueda</to><enabled>Y</enabled> </hop>
+  <hop> <from>Transformar respuesta en json</from><to>Eliminar campos innecesarios 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Eliminar campos innecesarios 2</from><to>A&#xf1;adir localizacion 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Eliminar campos innecesarios</from><to>A&#xf1;adir localizacion 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filtrar localizacion nula</from><to>Eliminar campos innecesarios</to><enabled>Y</enabled> </hop>
+  <hop> <from>A&#xf1;adir localizacion 2</from><to>A&#xf1;adir localizacion 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Eliminar campos innecesarios 3</from><to>A&#xf1;adir localizacion 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Transformar respuesta en json 2</from><to>Eliminar campos innecesarios 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>A&#xf1;adir localizacion 2 2</from><to>Ordenar campos</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ordenar campos</from><to>Unir filas</to><enabled>Y</enabled> </hop>
+  <hop> <from>Unir filas</from><to>Insertar en D_Autor</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>A&#xf1;adir clave subrogada</name>
@@ -150,165 +143,6 @@
     </step>
 
   <step>
-    <name>A&#xf1;adir constantes</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>CIUDAD</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>N&#x2f;A</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>ESTADO</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>N&#x2f;A</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>A&#xf1;adir constantes para igualar numero de campos</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>result</name>
-        <type>Boolean</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>N</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>ESTADO_EXCEL</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>N&#x2f;A</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1072</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>A&#xf1;adir localizacion</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>LOCALIZACION</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif> </nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>688</xloc>
-      <yloc>656</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Buscar coincidencias con estados abreviados</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Obtener lista de estados abreviados</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>ESTADO</name>
-        <field>REGION_1</field>
-      </key>
-      <value>
-        <name>CIUDAD_1</name>
-        <rename>ESTADO_EXCEL</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
-      <yloc>560</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Definir la url para la peticion</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -323,7 +157,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;&#xd;&#xa;var url &#x3d; &#x22;https&#x3a;&#x2f;&#x2f;maps.googleapis.com&#x2f;maps&#x2f;api&#x2f;geocode&#x2f;json&#x3f;address&#x3d;&#x22; &#x2b; CIUDAD &#x2b; &#x22;&#x26;key&#x3d;AIzaSyDoAt4apO4QgT9VjSLNax6C7M2CM_TF2LA&#x22;&#x3b;&#xd;&#xa;url &#x3d; url.replace&#x28;&#x2f; &#x2f;g,&#x27;&#x25;20&#x27;&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;&#xd;&#xa;var url &#x3d; &#x22;https&#x3a;&#x2f;&#x2f;maps.googleapis.com&#x2f;maps&#x2f;api&#x2f;geocode&#x2f;json&#x3f;address&#x3d;&#x22; &#x2b; LOCALIZACION &#x2b; &#x22;&#x26;key&#x3d;AIzaSyDoAt4apO4QgT9VjSLNax6C7M2CM_TF2LA&#x22;&#x3b;&#xd;&#xa;url &#x3d; url.replace&#x28;&#x2f; &#x2f;g,&#x27;&#x25;20&#x27;&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>url</name>
         <rename>url</rename>
         <type>String</type>
@@ -339,55 +173,7 @@
     </step>
 
   <step>
-    <name>Dividir localizacion</name>
-    <type>FieldSplitter</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <splitfield>LOCALIZACION</splitfield>
-   <delimiter>,</delimiter>
-   <enclosure/>
-    <fields>      <field>        <name>CIUDAD</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>      <field>        <name>ESTADO</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Eliminar campos innecesarios</name>
+    <name>Eliminar campos de la busqueda</name>
     <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
@@ -416,15 +202,15 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
-      <yloc>736</yloc>
+      <xloc>1232</xloc>
+      <yloc>656</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Eliminar espacio de los estados</name>
-    <type>StringOperations</type>
+    <name>Eliminar campos innecesarios</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -433,70 +219,19 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>ESTADO</in_stream_name>
-        <out_stream_name/>
-        <trim_type>left</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-    </fields>
-     <cluster_schema/>
+    <fields>      <field>        <name>NOMBRE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>AUTOR_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1440</xloc>
+      <xloc>560</xloc>
       <yloc>736</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Eliminar numeros de las abreviaturas</name>
-    <type>RegexEval</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <script><![CDATA[(\w{2}) [0-9]*]]></script>    <matcher>ESTADO</matcher>
-    <resultfieldname>result</resultfieldname>
-    <usevar>N</usevar>
-    <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>Y</replacefields>
-    <canoneq>N</canoneq>
-    <caseinsensitive>N</caseinsensitive>
-    <comment>N</comment>
-    <dotall>N</dotall>
-    <multiline>N</multiline>
-    <unicode>N</unicode>
-    <unix>N</unix>
-    <fields>
-      <field>
-        <name>ESTADO</name>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1440</xloc>
-      <yloc>656</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -579,35 +314,6 @@
     </step>
 
   <step>
-    <name>Filtrar estados nulos</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>A&#xf1;adir constantes para igualar numero de campos</send_true_to>
-<send_false_to>Seleccion de filas nulas &#x28;estado&#x29;</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>ESTADO</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>Kobe Bryant</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>864</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Filtrar localizacion nula</name>
     <type>FilterRows</type>
     <description/>
@@ -618,8 +324,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Dividir localizacion</send_true_to>
-<send_false_to>Seleccion de filas nulas</send_false_to>
+<send_true_to>Seleccion de filas nulas &#x28;estado&#x29;</send_true_to>
+<send_false_to>Eliminar campos innecesarios</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -649,8 +355,8 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1504</xloc>
-      <yloc>352</yloc>
+      <xloc>1440</xloc>
+      <yloc>656</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -707,38 +413,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Obtener estado</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;&#xd;&#xa;var direccion &#x3d; DIRECCION_GMAP&#x3b;&#xd;&#xa;var estado &#x3d; null&#x3b;&#xd;&#xa;direccion &#x3d; direccion.split&#x28;&#x22;,&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;direccion.length &#x3d;&#x3d; 3&#x29;&#x7b;&#xd;&#xa;	estado &#x3d; direccion&#x5b;1&#x5d;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;else&#x7b;&#xd;&#xa;	estado &#x3d; direccion&#x5b;0&#x5d;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>estado</name>
-        <rename>estado</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1024</xloc>
-      <yloc>656</yloc>
+      <xloc>1440</xloc>
+      <yloc>736</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -789,155 +465,6 @@
     </step>
 
   <step>
-    <name>Obtener lista de estados abreviados</name>
-    <type>ExcelInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <header>Y</header>
-    <noempty>Y</noempty>
-    <stoponempty>N</stoponempty>
-    <filefield/>
-    <sheetfield/>
-    <sheetrownumfield/>
-    <rownumfield/>
-    <sheetfield/>
-    <filefield/>
-    <limit>0</limit>
-    <encoding/>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <accept_filenames>N</accept_filenames>
-    <accept_field/>
-    <accept_stepname/>
-    <file>
-      <name>&#x24;&#x7b;Internal.Entry.Current.Directory&#x7d;&#x2f;estados.xls</name>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>CIUDAD_1</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>REGION_1</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-    </fields>
-    <sheets>
-    </sheets>
-    <strict_types>N</strict_types>
-    <error_ignored>N</error_ignored>
-    <error_line_skipped>N</error_line_skipped>
-    <bad_line_files_destination_directory/>
-    <bad_line_files_extension>warning</bad_line_files_extension>
-    <error_line_files_destination_directory/>
-    <error_line_files_extension>error</error_line_files_extension>
-    <line_number_files_destination_directory/>
-    <line_number_files_extension>line</line_number_files_extension>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-    <spreadsheet_type>JXL</spreadsheet_type>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1088</xloc>
-      <yloc>560</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Reemplazar valores abreviados</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;&#xd;&#xa;var estado &#x3d; ESTADO&#x3b;&#xd;&#xa;if&#x28;ESTADO_EXCEL &#x21;&#x3d; null&#x29;&#x7b;&#xd;&#xa;	estado &#x3d; ESTADO_EXCEL&#x3b;&#xd;&#xa;&#x7d;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>estado</name>
-        <rename>estado</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>Y</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Seleccion de filas nulas</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>NOMBRE</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>LOCALIZACION</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>AUTOR_ID</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Seleccion de filas nulas &#x28;estado&#x29;</name>
     <type>SelectValues</type>
     <description/>
@@ -952,15 +479,11 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>CIUDAD</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ESTADO</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
       </field>      <field>        <name>AUTOR_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>LOCALIZACION</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -969,141 +492,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>864</xloc>
       <yloc>352</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Seleccionar estado de la peticion</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>NOMBRE</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>AUTOR_ID</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>CIUDAD</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>estado_1</name>
-        <rename>ESTADO</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>ESTADO</name>
-        <rename>ESTADO</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1200</xloc>
-      <yloc>656</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Seleccionar todos los campos para insertar</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>NOMBRE</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>AUTOR_ID</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>CIUDAD</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ESTADO</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>result</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ESTADO_EXCEL</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1360</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Seleccionar valores necesarios</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>NOMBRE</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>LOCALIZACION</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>AUTOR_ID</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>CIUDAD</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ESTADO</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>688</xloc>
-      <yloc>512</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1139,9 +527,9 @@
     </file>
     <fields>
       <field>
-        <name>DIRECCION_GMAP</name>
-        <path>results&#x5b;0&#x5d;.formatted_address</path>
-        <type>None</type>
+        <name>ESTADO</name>
+        <path>results&#x5b;0&#x5d;.address_components&#x5b;&#x3f;&#x28;&#x40;.types&#x5b;0&#x5d; &#x3d;&#x3d; &#x27;administrative_area_level_1&#x27;&#x29;&#x5d;.long_name</path>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1209,10 +597,248 @@
       </GUI>
     </step>
 
+  <step>
+    <name>Transformar respuesta en json 2</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <defaultPathLeafToNull>N</defaultPathLeafToNull>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>CIUDAD</name>
+        <path>results&#x5b;0&#x5d;.address_components&#x5b;&#x3f;&#x28;&#x40;.types&#x5b;0&#x5d; &#x3d;&#x3d; &#x27;locality&#x27;&#x29;&#x5d;.long_name</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>result</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1040</xloc>
+      <yloc>656</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>A&#xf1;adir localizacion 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>ESTADO</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>N&#x2f;A</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>864</xloc>
+      <yloc>864</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>A&#xf1;adir localizacion 2 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>CIUDAD</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>N&#x2f;A</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1040</xloc>
+      <yloc>864</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Eliminar campos innecesarios 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>NOMBRE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>AUTOR_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>864</xloc>
+      <yloc>752</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Eliminar campos innecesarios 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>NOMBRE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>AUTOR_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ESTADO</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1040</xloc>
+      <yloc>752</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Ordenar campos</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>NOMBRE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>AUTOR_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CIUDAD</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ESTADO</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1232</xloc>
+      <yloc>864</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step_error_handling>
       <error>
         <source_step>Transformar respuesta en json</source_step>
-        <target_step>A&#xf1;adir localizacion</target_step>
+        <target_step>Eliminar campos innecesarios 2</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename/>
+        <fields_valuename/>
+        <codes_valuename/>
+        <max_errors/>
+        <max_pct_errors/>
+        <min_pct_rows/>
+      </error>
+      <error>
+        <source_step>Transformar respuesta en json 2</source_step>
+        <target_step>Eliminar campos innecesarios 3</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename/>

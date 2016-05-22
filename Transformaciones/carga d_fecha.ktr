@@ -1058,7 +1058,7 @@
         <set_empty_string>N</set_empty_string>
       </field>
     </fields>
-    <limit>3000</limit>
+    <limit>6000</limit>
     <never_ending>N</never_ending>
     <interval_in_ms/>
     <row_time_field/>
