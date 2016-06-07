@@ -167,8 +167,11 @@
   <hop> <from>Eliminar campos nulos</from><to>Eliminar subindices de Wikipedia</to><enabled>Y</enabled> </hop>
   <hop> <from>Extraer direcci&#xf3;n desglosada de la direccion completa</from><to>Agregar nombre estados</to><enabled>Y</enabled> </hop>
   <hop> <from>Eliminar subindices de Wikipedia</from><to>Agregar nombre estados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Agregar nombre estados</from><to>Insertar datos en la D_HOTEL</to><enabled>Y</enabled> </hop>
   <hop> <from>Eliminar subindices de Wikipedia</from><to>Guardar datos en excel</to><enabled>Y</enabled> </hop>
+  <hop> <from>Definir la url para la peticion</from><to>Peticion GoogleMaps</to><enabled>Y</enabled> </hop>
+  <hop> <from>Agregar nombre estados</from><to>Definir la url para la peticion</to><enabled>Y</enabled> </hop>
+  <hop> <from>Peticion GoogleMaps</from><to>Obtener Latitud-Longitud</to><enabled>Y</enabled> </hop>
+  <hop> <from>Obtener Latitud-Longitud</from><to>Insertar datos en la D_HOTEL</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Agregar nombre estados</name>
@@ -441,9 +444,11 @@
     <rownum>N</rownum>
     <addresultfile>N</addresultfile>
     <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
     <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
     <ignoreMissingPath>N</ignoreMissingPath>
+    <defaultPathLeafToNull>N</defaultPathLeafToNull>
     <rownum_field/>
     <file>
       <name>&#x24;&#x7b;Internal.Entry.Current.Directory&#x7d;&#x2f;..&#x2f;Fuente datos</name>
@@ -672,11 +677,19 @@
           <column_name>ESTADO</column_name>
           <stream_name>ESTADO</stream_name>
         </field>
+        <field>
+          <column_name>LATITUD</column_name>
+          <stream_name>LATITUD</stream_name>
+        </field>
+        <field>
+          <column_name>LONGITUD</column_name>
+          <stream_name>LONGITUD</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1392</xloc>
-      <yloc>192</yloc>
+      <xloc>1792</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -965,6 +978,158 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>336</xloc>
       <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Definir la url para la peticion</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;&#xd;&#xa;var url &#x3d; &#x22;https&#x3a;&#x2f;&#x2f;maps.googleapis.com&#x2f;maps&#x2f;api&#x2f;geocode&#x2f;json&#x3f;address&#x3d;&#x22; &#x2b; DIRECCION &#x2b; &#x22;&#x26;key&#x3d;AIzaSyDoAt4apO4QgT9VjSLNax6C7M2CM_TF2LA&#x22;&#x3b;&#xd;&#xa;url &#x3d; url.replace&#x28;&#x2f; &#x2f;g,&#x27;&#x25;20&#x27;&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>url</name>
+        <rename>url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1392</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Peticion GoogleMaps</name>
+    <type>Rest</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <applicationType>JSON</applicationType>
+    <method>GET</method>
+    <url>https&#x3a;&#x2f;&#x2f;maps.googleapis.com&#x2f;maps&#x2f;api&#x2f;geocode&#x2f;json</url>
+    <urlInField>Y</urlInField>
+    <dynamicMethod>N</dynamicMethod>
+    <methodFieldName/>
+    <urlField>url</urlField>
+    <bodyField/>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <preemptive>N</preemptive>
+    <trustStoreFile/>
+    <trustStorePassword>Encrypted </trustStorePassword>
+    <headers>
+      </headers>
+    <parameters>
+      </parameters>
+    <matrixParameters>
+      </matrixParameters>
+    <result>
+      <name>response_gmap</name>
+      <code/>
+      <response_time/>
+      </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1584</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Obtener Latitud-Longitud</name>
+    <type>JsonInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <readurl>N</readurl>
+    <removeSourceField>N</removeSourceField>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <doNotFailIfNoFile>Y</doNotFailIfNoFile>
+    <ignoreMissingPath>N</ignoreMissingPath>
+    <defaultPathLeafToNull>N</defaultPathLeafToNull>
+    <rownum_field/>
+    <file>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <fields>
+      <field>
+        <name>LATITUD</name>
+        <path>results&#x5b;0&#x5d;.geometry.location.lat</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>LONGITUD</name>
+        <path>results&#x5b;0&#x5d;.geometry.location.lng</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+    </fields>
+    <limit>0</limit>
+    <IsInFields>Y</IsInFields>
+    <IsAFile>N</IsAFile>
+    <valueField>response_gmap</valueField>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+    <sizeFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1584</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
