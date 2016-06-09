@@ -76,8 +76,8 @@
   <notepads>
     <notepad>
       <note>Cargar dimensi&#xf3;n tiempo mediante un javascript que carga fechas hasta el d&#xed;a de hoy. &#xa;Deber&#xed;a ejecutarse cada d&#xed;a</note>
-      <xloc>80</xloc>
-      <yloc>336</yloc>
+      <xloc>224</xloc>
+      <yloc>304</yloc>
       <width>516</width>
       <heigth>42</heigth>
       <fontname>Arial</fontname>
@@ -950,8 +950,8 @@
       <max_value>9999999</max_value>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>424</xloc>
-      <yloc>51</yloc>
+      <xloc>400</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1065,8 +1065,8 @@
     <last_time_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>301</xloc>
-      <yloc>47</yloc>
+      <xloc>272</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
